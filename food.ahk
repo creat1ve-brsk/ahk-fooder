@@ -39,10 +39,10 @@ Loop {
 	PixelGetColor, color, x, y, RGB
 	if (color = c) {
 		val := "Food is here, all right :3"
-}
+	}
 	else {
 		val := "Food not found"
-}
+	}
 	ToolTip, My color=%c%`nI find color=%color%`n`n%val%`n`nF3 to take color`nF4 to exit app
 	Sleep, 10
 }
@@ -57,24 +57,26 @@ buff_search:
 PixelGetColor, color, x, y, RGB
 if (color = c) {
 	return
-	val := "Food not found"
+	val := "Found is here, all right :3"
 }
 else {
-	val := "Found is here, all right :3"
+	val := "Food not found"
 	SendPlay, {5}
 }
 return
 
 F3::
+SetTimer,, Off
 While not GetKeyState("LCtrl")
-	{
-		MouseGetPos, x, y
-		PixelGetColor, c, x, y, RGB
-		Tooltip, x=%x%`ny=%y%`nc=%c%
-		Sleep, 10
-	}
-	IniWrite, %x%, food.ini, Values, x
-	IniWrite, %y%, food.ini, Values, y
-	IniWrite, %c%, food.ini, Values, c
-	ToolTip,
+{
+	MouseGetPos, x, y
+	PixelGetColor, c, x, y, RGB
+	Tooltip, x=%x%`ny=%y%`nc=%c%
+	Sleep, 10
+}
+IniWrite, %x%, food.ini, Values, x
+IniWrite, %y%, food.ini, Values, y
+IniWrite, %c%, food.ini, Values, c
+ToolTip,
+SetTimer,, 60000
 return
